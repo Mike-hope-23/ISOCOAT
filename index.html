@@ -1,37 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Painting | Insulation</title>
+    <title data-i18n="pageTitle">Painting | Insulation</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <header class="navbar">
-        <a href="#" class="logo">
+        <a href="#top" class="logo">
             <div class="logo-icon">⌂</div>
 
             <div class="logo-text">
                 <strong>ISOCOAT</strong>
-                <span>THESSALONIKI PAINTING AND ISOLATION</span>
+                <span data-i18n="logoTagline">THESSALONIKI PAINTING AND ISOLATION</span>
             </div>
         </a>
 
-        <nav class="nav-links">
-            <a href="#">About</a>
-            <a href="#">Blog</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
-            <a href="#" class="nav-quote">Get a quote</a>
-        </nav>
+        <div class="nav-actions">
+            <nav class="nav-links">
+                <a href="#gallery" data-i18n="navGallery">Gallery</a>
+                <a href="#services" data-i18n="navServices">Services</a>
+                <button type="button" class="nav-quote" data-open-quote data-i18n="navQuote">Get a quote</button>
+            </nav>
+
+            <div class="lang-switch" role="group" aria-label="Language">
+                <button type="button" class="lang-button is-active" data-lang="en" aria-pressed="true">EN</button>
+                <button type="button" class="lang-button" data-lang="el" aria-pressed="false">ΕΛ</button>
+            </div>
+        </div>
 
         <button class="menu-button" id="menuButton">
             <span></span>
@@ -46,31 +52,168 @@
 
         <div class="hero-content">
 
-            <h1>
+            <h1 data-i18n-html="heroTitle">
                 We provide today's
                 <span>insulation</span> for a
                 lifetime of <span>comfort</span>
             </h1>
 
-            <p>
-                If you're from Thessaloniki, Greece, or the surrounding areas and you're paying a lot for
-                heating and cooling, we would love to help you! In more than 15 years of experience
-                we focused and improved in spray foam and blow-in insulations.
+            <p data-i18n="heroText">
+                Based in Thessaloniki, Greece, we provide professional interior and exterior painting services. With over 15 years of experience, we focus on clean, high-quality finishes that make every space look its best.
             </p>
 
             <div class="hero-buttons">
-                <a href="#" class="button primary">Get a quote</a>
-                <a href="#" class="button secondary">Our services</a>
+                <button type="button" class="button primary" data-open-quote data-i18n="navQuote">Get a quote</button>
+                <a href="#services" class="button secondary" data-i18n="heroServices">Our services</a>
             </div>
 
         </div>
 
-        <div class="hero-bottom">
+        <div class="hero-bottom" data-i18n="heroBottom">
             Proudly serving Thessaloniki, Greece and surrounding areas.
         </div>
 
     </main>
 
+    <section class="section gallery" id="gallery">
+        <div class="section-inner">
+            <p class="section-label" data-i18n="galleryLabel">Our work</p>
+            <h2 data-i18n="galleryTitle">Gallery</h2>
+            <p class="section-intro" data-i18n="galleryIntro">
+                A look at recent painting and insulation projects around Thessaloniki. Clean finishes, careful prep, and results that last.
+            </p>
+
+            <div class="gallery-carousel" id="galleryCarousel">
+                <button type="button" class="gallery-arrow gallery-prev" data-gallery-prev data-i18n-aria="galleryPrev" aria-label="Previous photo">‹</button>
+
+                <div class="gallery-stage">
+                    <a href="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1800&q=80" class="gallery-slide is-active" data-fancybox="works" data-caption="Interior painting" data-i18n-caption="galleryCap1">
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1200&q=80" alt="Freshly painted living room with even white walls" data-i18n-alt="galleryAlt1">
+                        <span class="gallery-caption" data-i18n="galleryCap1">Interior painting</span>
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80" class="gallery-slide" data-fancybox="works" data-caption="Exterior painting" data-i18n-caption="galleryCap2">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="House exterior with a clean painted facade" data-i18n-alt="galleryAlt2">
+                        <span class="gallery-caption" data-i18n="galleryCap2">Exterior painting</span>
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=80" class="gallery-slide" data-fancybox="works" data-caption="Thermal insulation" data-i18n-caption="galleryCap3">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80" alt="Building insulation and construction finishing work" data-i18n-alt="galleryAlt3">
+                        <span class="gallery-caption" data-i18n="galleryCap3">Thermal insulation</span>
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1800&q=80" class="gallery-slide" data-fancybox="works" data-caption="Wall finishing" data-i18n-caption="galleryCap4">
+                        <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1200&q=80" alt="Modern interior with smooth painted walls" data-i18n-alt="galleryAlt4">
+                        <span class="gallery-caption" data-i18n="galleryCap4">Wall finishing</span>
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80" class="gallery-slide" data-fancybox="works" data-caption="Residential interiors" data-i18n-caption="galleryCap5">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" alt="Bright kitchen with a professional paint finish" data-i18n-alt="galleryAlt5">
+                        <span class="gallery-caption" data-i18n="galleryCap5">Residential interiors</span>
+                    </a>
+                </div>
+
+                <button type="button" class="gallery-arrow gallery-next" data-gallery-next data-i18n-aria="galleryNext" aria-label="Next photo">›</button>
+
+                <div class="gallery-dots" id="galleryDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section services" id="services">
+        <div class="section-inner">
+            <p class="section-label" data-i18n="servicesLabel">What we do</p>
+            <h2 data-i18n="servicesTitle">Services</h2>
+            <p class="section-intro" data-i18n="servicesIntro">
+                Professional painting and insulation for homes and businesses in Thessaloniki. We handle the job from surface prep to the final coat.
+            </p>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-photo">
+                        <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80" alt="Interior painting of a modern room" data-i18n-alt="service1Alt">
+                    </div>
+                    <div class="service-body">
+                        <h3 data-i18n="service1Title">Interior painting</h3>
+                        <p class="service-scope" data-i18n="service1Scope">Apartments, houses, and offices</p>
+                        <p data-i18n="service1Text">Even coverage and a clean result, from walls and ceilings to trim. We protect the space and leave it ready to live in.</p>
+                        <p class="service-includes" data-i18n="includesLabel">What's included</p>
+                        <ul>
+                            <li data-i18n="service1Inc1">Surface prep and filling</li>
+                            <li data-i18n="service1Inc2">Furniture and floor protection</li>
+                            <li data-i18n="service1Inc3">Walls, ceilings, and trim</li>
+                            <li data-i18n="service1Inc4">Full cleanup after the job</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="service-card">
+                    <div class="service-photo">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Exterior painting of a house facade" data-i18n-alt="service2Alt">
+                    </div>
+                    <div class="service-body">
+                        <h3 data-i18n="service2Title">Exterior painting</h3>
+                        <p class="service-scope" data-i18n="service2Scope">Houses, buildings, and outdoor surfaces</p>
+                        <p data-i18n="service2Text">Weather-ready finishes for facades, railings, and outdoor surfaces. Built to look sharp and hold up in the Greek climate.</p>
+                        <p class="service-includes" data-i18n="includesLabel">What's included</p>
+                        <ul>
+                            <li data-i18n="service2Inc1">Facade prep and repairs</li>
+                            <li data-i18n="service2Inc2">Weather-resistant coatings</li>
+                            <li data-i18n="service2Inc3">Railings and outdoor details</li>
+                            <li data-i18n="service2Inc4">Finish suited to local weather</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="service-card">
+                    <div class="service-photo">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Thermal insulation work on a building" data-i18n-alt="service3Alt">
+                    </div>
+                    <div class="service-body">
+                        <h3 data-i18n="service3Title">Thermal insulation</h3>
+                        <p class="service-scope" data-i18n="service3Scope">Homes and commercial spaces</p>
+                        <p data-i18n="service3Text">Insulation that cuts heat loss, keeps rooms comfortable year-round, and helps lower energy costs for the long term.</p>
+                        <p class="service-includes" data-i18n="includesLabel">What's included</p>
+                        <ul>
+                            <li data-i18n="service3Inc1">On-site check and measurements</li>
+                            <li data-i18n="service3Inc2">Thermal insulation installation</li>
+                            <li data-i18n="service3Inc3">Sealing and finishing</li>
+                            <li data-i18n="service3Inc4">Better comfort, lower energy use</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+
+            <div class="visit-banner">
+                <div>
+                    <p class="visit-label" data-i18n="visitLabel">Free site visit</p>
+                    <p data-i18n="visitText">We come to the property at no cost, see the job in person, and then give you a quote.</p>
+                </div>
+                <button type="button" class="button primary" data-open-quote data-i18n="navQuote">Get a quote</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="quote-modal" id="quoteModal" hidden>
+        <div class="quote-backdrop" data-close-quote></div>
+        <div class="quote-dialog" role="dialog" aria-modal="true" aria-labelledby="quoteTitle">
+            <button type="button" class="quote-close" data-close-quote data-i18n-aria="closeQuote" aria-label="Close">&times;</button>
+            <h2 id="quoteTitle" data-i18n="navQuote">Get a quote</h2>
+                    <p data-i18n="quoteText">Leave your name and phone number. We will call you to plan a free site visit and quote.</p>
+
+            <form class="quote-form" id="quoteForm">
+                <label>
+                    <span data-i18n="quoteName">Name</span>
+                    <input type="text" name="name" autocomplete="name" required>
+                </label>
+                <label>
+                    <span data-i18n="quotePhone">Phone</span>
+                    <input type="tel" name="phone" autocomplete="tel" inputmode="tel" required>
+                </label>
+                <button type="submit" class="button primary" data-i18n="quoteSend">Send</button>
+            </form>
+
+            <p class="quote-success" id="quoteSuccess" hidden data-i18n="quoteSuccess">
+                Thank you. We have your details and will call you soon to plan.
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="script.js"></script>
 
 </body>
