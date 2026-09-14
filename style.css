@@ -706,6 +706,18 @@ a {
     line-height: 1.6;
 }
 
+.quote-error {
+    margin-top: 18px;
+    color: #f28b82;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.quote-form button:disabled {
+    cursor: wait;
+    opacity: .65;
+}
+
 body.quote-open {
     overflow: hidden;
 }

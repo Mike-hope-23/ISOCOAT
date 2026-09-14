@@ -87,19 +87,19 @@
                 <div class="gallery-stage">
                     <a href="./interior.webp" class="gallery-slide is-active" data-fancybox="works" data-caption="Interior painting" data-i18n-caption="galleryCap1">
                         <img src="./interior.webp" alt="Freshly painted living room with even white walls" data-i18n-alt="galleryAlt1">
-                        <span class="gallery-caption" data-i18n="galleryCap1">Interior painting</span>
+                        <span class="gallery-caption" data-i18n="galleryCap1">Interior Wall Finish</span>
                     </a>
-                    <a href="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80" class="gallery-slide" data-fancybox="works" data-caption="Exterior painting" data-i18n-caption="galleryCap2">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="House exterior with a clean painted facade" data-i18n-alt="galleryAlt2">
-                        <span class="gallery-caption" data-i18n="galleryCap2">Exterior painting</span>
+                    <a href="./Exterior_Painting.webp" class="gallery-slide" data-fancybox="works" data-caption="Exterior painting" data-i18n-caption="galleryCap2">
+                        <img src="./Exterior_Painting.webp" alt="House exterior with a clean painted facade" data-i18n-alt="galleryAlt2">
+                        <span class="gallery-caption" data-i18n="galleryCap2">Exterior Painting</span>
                     </a>
-                    <a href="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1800&q=80" class="gallery-slide" data-fancybox="works" data-caption="Wall finishing" data-i18n-caption="galleryCap4">
-                        <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=1200&q=80" alt="Modern interior with smooth painted walls" data-i18n-alt="galleryAlt4">
-                        <span class="gallery-caption" data-i18n="galleryCap4">Wall finishing</span>
+                    <a href="./Exterior_Painting_2.webp" class="gallery-slide" data-fancybox="works" data-caption="Exterior painting" data-i18n-caption="galleryCap4">
+                        <img src="./Exterior_Painting_2.webp" alt="Modern interior with smooth painted walls" data-i18n-alt="galleryAlt4">
+                        <span class="gallery-caption" data-i18n="galleryCap4">Exterior Painting</span>
                     </a>
-                    <a href="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80" class="gallery-slide" data-fancybox="works" data-caption="Residential interiors" data-i18n-caption="galleryCap5">
-                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" alt="Bright kitchen with a professional paint finish" data-i18n-alt="galleryAlt5">
-                        <span class="gallery-caption" data-i18n="galleryCap5">Residential interiors</span>
+                    <a href="./Exterior_Painting_3.webp" class="gallery-slide" data-fancybox="works" data-caption="Exterior painting" data-i18n-caption="galleryCap5">
+                        <img src="./Exterior_Painting_3.webp" alt="Bright kitchen with a professional paint finish" data-i18n-alt="galleryAlt5">
+                        <span class="gallery-caption" data-i18n="galleryCap5">Exterior Painting</span>
                     </a>
                 </div>
 
@@ -172,7 +172,7 @@
             <h2 id="quoteTitle" data-i18n="navQuote">Get a quote</h2>
             <p data-i18n="quoteText">Leave your name and phone number. We will call you to plan a free site visit and quote.</p>
 
-            <form class="quote-form" id="quoteForm">
+            <form class="quote-form" id="quoteForm" data-form-endpoint="https://formspree.io/f/mqpkrdqq">
                 <label>
                     <span data-i18n="quoteName">Name</span>
                     <input type="text" name="name" autocomplete="name" required>
@@ -183,6 +183,8 @@
                 </label>
                 <button type="submit" class="button primary" data-i18n="quoteSend">Send</button>
             </form>
+
+            <p class="quote-error" id="quoteError" hidden role="alert"></p>
 
             <p class="quote-success" id="quoteSuccess" hidden data-i18n="quoteSuccess">
                 Thank you. We have your details and will call you soon to plan.

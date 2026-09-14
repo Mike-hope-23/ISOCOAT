@@ -3,6 +3,7 @@ const navLinks = document.querySelector(".nav-links");
 const quoteModal = document.getElementById("quoteModal");
 const quoteForm = document.getElementById("quoteForm");
 const quoteSuccess = document.getElementById("quoteSuccess");
+const quoteError = document.getElementById("quoteError");
 const langButtons = document.querySelectorAll(".lang-button");
 const langSwitch = document.querySelector(".lang-switch");
 
@@ -56,6 +57,9 @@ const translations = {
         quoteName: "Name",
         quotePhone: "Phone",
         quoteSend: "Send",
+        formSending: "Sending...",
+        formNotConnected: "The form is not connected yet. Add a form endpoint before accepting enquiries.",
+        formSendError: "We could not send your details. Please try again or contact us by phone.",
         quoteSuccess: "Thank you. We have your details and will call you soon to plan a free site visit.",
         closeQuote: "Close",
         language: "Language"
@@ -77,8 +81,8 @@ const translations = {
         galleryNext: "Επόμενη φωτογραφία",
         galleryCap1: "Εσωτερικό βάψιμο",
         galleryCap2: "Εξωτερικό βάψιμο",
-        galleryCap4: "Φινίρισμα τοίχων",
-        galleryCap5: "Εσωτερικοί χώροι κατοικιών",
+        galleryCap4: "Εξωτερικό βάψιμο",
+        galleryCap5: "Εξωτερικό βάψιμο",
         galleryAlt1: "Σαλόνι με φρεσκοβαμμένους λευκούς τοίχους",
         galleryAlt2: "Εξωτερική όψη σπιτιού με καθαρό βάψιμο",
         galleryAlt4: "Μοντέρνος εσωτερικός χώρος με λείους τοίχους",
@@ -109,6 +113,9 @@ const translations = {
         quoteName: "Όνομα",
         quotePhone: "Τηλέφωνο",
         quoteSend: "Αποστολή",
+        formSending: "Αποστολή...",
+        formNotConnected: "Η φόρμα δεν έχει συνδεθεί ακόμα. Προσθέστε endpoint πριν δεχτείτε αιτήματα.",
+        formSendError: "Δεν ήταν δυνατή η αποστολή των στοιχείων. Δοκιμάστε ξανά ή επικοινωνήστε τηλεφωνικά.",
         quoteSuccess: "Ευχαριστούμε. Έχουμε τα στοιχεία σας και θα σας καλέσουμε σύντομα για δωρεάν επίσκεψη.",
         closeQuote: "Κλείσιμο",
         language: "Γλώσσα"
@@ -183,6 +190,7 @@ navLinks.addEventListener("click", (event) => {
 function openQuote() {
     closeMenu();
     quoteSuccess.hidden = true;
+    quoteError.hidden = true;
     quoteForm.hidden = false;
     quoteForm.reset();
     quoteModal.hidden = false;
@@ -209,10 +217,48 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-quoteForm.addEventListener("submit", (event) => {
+quoteForm.addEventListener("submit", async (event) => {
     event.preventDefault();
-    quoteForm.hidden = true;
-    quoteSuccess.hidden = false;
+
+    const endpoint = quoteForm.dataset.formEndpoint.trim();
+    const submitButton = quoteForm.querySelector("button[type='submit']");
+    const formData = new FormData(quoteForm);
+
+    quoteError.hidden = true;
+
+    if (!endpoint) {
+        quoteError.textContent = translations[document.documentElement.lang].formNotConnected;
+        quoteError.hidden = false;
+        return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.textContent = translations[document.documentElement.lang].formSending;
+
+    try {
+        const response = await fetch(endpoint, {
+            method: "POST",
+            body: formData,
+            headers: {
+                Accept: "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Form submission failed with status ${response.status}`);
+        }
+
+        quoteForm.hidden = true;
+        quoteSuccess.hidden = false;
+        quoteForm.reset();
+    } catch (error) {
+        console.error(error);
+        quoteError.textContent = translations[document.documentElement.lang].formSendError;
+        quoteError.hidden = false;
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = translations[document.documentElement.lang].quoteSend;
+    }
 });
 
 langButtons.forEach((button) => {
