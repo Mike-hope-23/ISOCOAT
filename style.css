@@ -77,9 +77,10 @@ a {
 }
 
 .logo-text strong {
-    font-size: 25px;
+    font-size: 20px;
     line-height: 1;
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
 }
 
 .logo-text strong::first-letter {
@@ -825,7 +826,7 @@ body.quote-open {
     }
 
     .logo-text strong {
-        font-size: 20px;
+        font-size: 17px;
     }
 
     .logo-text span {
@@ -986,6 +987,6 @@ body.quote-open {
     }
 
     .logo-text strong {
-        font-size: 18px;
+        font-size: 16px;
     }
 }
