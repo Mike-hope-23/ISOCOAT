@@ -3,7 +3,6 @@ const navLinks = document.querySelector(".nav-links");
 const quoteModal = document.getElementById("quoteModal");
 const quoteForm = document.getElementById("quoteForm");
 const quoteSuccess = document.getElementById("quoteSuccess");
-const quoteError = document.getElementById("quoteError");
 const langButtons = document.querySelectorAll(".lang-button");
 const langSwitch = document.querySelector(".lang-switch");
 
@@ -23,11 +22,13 @@ const translations = {
         galleryIntro: "A look at recent painting projects around Thessaloniki. Clean finishes, careful prep, and results that last.",
         galleryPrev: "Previous photo",
         galleryNext: "Next photo",
-        galleryCap1: "Interior painting",
+        galleryCap1: "Exterior painting and insulation",
         galleryCap2: "Exterior painting",
-        galleryCap4: "Wall finishing",
-        galleryCap5: "Residential interiors",
-        galleryAlt1: "Freshly painted living room with even white walls",
+        galleryCap3: "Exterior painting",
+        galleryCap4: "Interior painting and finishing",
+        galleryCap5: "Plasterboard preparation",
+        galleryCap6: "Insulation preparation",
+        galleryAlt1: "Exterior painting and insulation of a house",
         galleryAlt2: "House exterior with a clean painted facade",
         galleryAlt4: "Modern interior with smooth painted walls",
         galleryAlt5: "Bright kitchen with a professional paint finish",
@@ -57,12 +58,13 @@ const translations = {
         quoteName: "Name",
         quotePhone: "Phone",
         quoteSend: "Send",
-        formSending: "Sending...",
-        formNotConnected: "The form is not connected yet. Add a form endpoint before accepting enquiries.",
-        formSendError: "We could not send your details. Please try again or contact us by phone.",
         quoteSuccess: "Thank you. We have your details and will call you soon to plan a free site visit.",
+        privacyConsent: 'I agree to the processing of my details in order to respond to my message, in accordance with the <a href="privacypolicy.html" target="_blank" rel="noopener">Privacy Policy</a>.',
+        footerPrivacy: "Privacy Policy / Πολιτική Απορρήτου",
         closeQuote: "Close",
-        language: "Language"
+        language: "Language",
+        policyTitle: "Privacy Policy - ISOCOAT",
+        policyBack: "Home"
     },
     el: {
         pageTitle: "Ελαιοχρωματισμοί | Βάψιμο",
@@ -79,11 +81,13 @@ const translations = {
         galleryIntro: "Μια ματιά σε πρόσφατα έργα βαψίματος στη Θεσσαλονίκη. Καθαρά φινιρίσματα, προσεκτική προετοιμασία και αποτελέσματα που διαρκούν.",
         galleryPrev: "Προηγούμενη φωτογραφία",
         galleryNext: "Επόμενη φωτογραφία",
-        galleryCap1: "Εσωτερικό βάψιμο",
+        galleryCap1: "Εξωτερικό βάψιμο και μόνωση",
         galleryCap2: "Εξωτερικό βάψιμο",
-        galleryCap4: "Εξωτερικό βάψιμο",
-        galleryCap5: "Εξωτερικό βάψιμο",
-        galleryAlt1: "Σαλόνι με φρεσκοβαμμένους λευκούς τοίχους",
+        galleryCap3: "Εξωτερικό βάψιμο",
+        galleryCap4: "Φινίρισμα εσωτερικού χώρου",
+        galleryCap5: "Προετοιμασία γυψοσανίδων",
+        galleryCap6: "Προετοιμασία μόνωσης",
+        galleryAlt1: "Εξωτερικό βάψιμο και μόνωση ενός σπιτιού",
         galleryAlt2: "Εξωτερική όψη σπιτιού με καθαρό βάψιμο",
         galleryAlt4: "Μοντέρνος εσωτερικός χώρος με λείους τοίχους",
         galleryAlt5: "Φωτεινή κουζίνα με επαγγελματικό βάψιμο",
@@ -113,25 +117,34 @@ const translations = {
         quoteName: "Όνομα",
         quotePhone: "Τηλέφωνο",
         quoteSend: "Αποστολή",
-        formSending: "Αποστολή...",
-        formNotConnected: "Η φόρμα δεν έχει συνδεθεί ακόμα. Προσθέστε endpoint πριν δεχτείτε αιτήματα.",
-        formSendError: "Δεν ήταν δυνατή η αποστολή των στοιχείων. Δοκιμάστε ξανά ή επικοινωνήστε τηλεφωνικά.",
         quoteSuccess: "Ευχαριστούμε. Έχουμε τα στοιχεία σας και θα σας καλέσουμε σύντομα για δωρεάν επίσκεψη.",
+        privacyConsent: 'Συμφωνώ με την επεξεργασία των στοιχείων μου για την απάντηση στο μήνυμά μου, σύμφωνα με την <a href="privacypolicy.html" target="_blank" rel="noopener">Πολιτική Απορρήτου</a>.',
+        footerPrivacy: "Πολιτική Απορρήτου / Privacy Policy",
         closeQuote: "Κλείσιμο",
-        language: "Γλώσσα"
+        language: "Γλώσσα",
+        policyTitle: "Πολιτική Απορρήτου - ISOCOAT",
+        policyBack: "Αρχική"
     }
 };
 
 function closeMenu() {
-    navLinks.classList.remove("active");
+    if (navLinks) {
+        navLinks.classList.remove("active");
+    }
 }
 
 function applyLanguage(lang) {
     const copy = translations[lang] || translations.en;
 
     document.documentElement.lang = lang;
-    document.title = copy.pageTitle;
-    langSwitch.setAttribute("aria-label", copy.language);
+    document.title = copy.pageTitle || copy.policyTitle;
+    if (langSwitch) {
+        langSwitch.setAttribute("aria-label", copy.language);
+    }
+
+    document.querySelectorAll(".policy-section[lang]").forEach((section) => {
+        section.hidden = section.lang !== lang;
+    });
 
     document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.getAttribute("data-i18n");
@@ -177,20 +190,21 @@ function applyLanguage(lang) {
     localStorage.setItem("isocoat-lang", lang);
 }
 
-menuButton.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-});
+if (menuButton && navLinks) {
+    menuButton.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+    });
 
-navLinks.addEventListener("click", (event) => {
-    if (event.target.closest("a, [data-open-quote]")) {
-        closeMenu();
-    }
-});
+    navLinks.addEventListener("click", (event) => {
+        if (event.target.closest("a, [data-open-quote]")) {
+            closeMenu();
+        }
+    });
+}
 
 function openQuote() {
     closeMenu();
     quoteSuccess.hidden = true;
-    quoteError.hidden = true;
     quoteForm.hidden = false;
     quoteForm.reset();
     quoteModal.hidden = false;
@@ -203,63 +217,27 @@ function closeQuote() {
     document.body.classList.remove("quote-open");
 }
 
-document.querySelectorAll("[data-open-quote]").forEach((button) => {
-    button.addEventListener("click", openQuote);
-});
+if (quoteForm && quoteModal && quoteSuccess) {
+    document.querySelectorAll("[data-open-quote]").forEach((button) => {
+        button.addEventListener("click", openQuote);
+    });
 
-document.querySelectorAll("[data-close-quote]").forEach((element) => {
-    element.addEventListener("click", closeQuote);
-});
+    document.querySelectorAll("[data-close-quote]").forEach((element) => {
+        element.addEventListener("click", closeQuote);
+    });
 
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !quoteModal.hidden) {
-        closeQuote();
-    }
-});
-
-quoteForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const endpoint = quoteForm.dataset.formEndpoint.trim();
-    const submitButton = quoteForm.querySelector("button[type='submit']");
-    const formData = new FormData(quoteForm);
-
-    quoteError.hidden = true;
-
-    if (!endpoint) {
-        quoteError.textContent = translations[document.documentElement.lang].formNotConnected;
-        quoteError.hidden = false;
-        return;
-    }
-
-    submitButton.disabled = true;
-    submitButton.textContent = translations[document.documentElement.lang].formSending;
-
-    try {
-        const response = await fetch(endpoint, {
-            method: "POST",
-            body: formData,
-            headers: {
-                Accept: "application/json"
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Form submission failed with status ${response.status}`);
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !quoteModal.hidden) {
+            closeQuote();
         }
+    });
 
+    quoteForm.addEventListener("submit", (event) => {
+        event.preventDefault();
         quoteForm.hidden = true;
         quoteSuccess.hidden = false;
-        quoteForm.reset();
-    } catch (error) {
-        console.error(error);
-        quoteError.textContent = translations[document.documentElement.lang].formSendError;
-        quoteError.hidden = false;
-    } finally {
-        submitButton.disabled = false;
-        submitButton.textContent = translations[document.documentElement.lang].quoteSend;
-    }
-});
+    });
+}
 
 langButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -268,75 +246,78 @@ langButtons.forEach((button) => {
 });
 
 const savedLang = localStorage.getItem("isocoat-lang");
-const browserLang = navigator.language.toLowerCase().startsWith("el") ? "el" : "en";
-applyLanguage(savedLang === "el" || savedLang === "en" ? savedLang : browserLang);
+applyLanguage(savedLang === "el" || savedLang === "en" ? savedLang : "el");
 
 const gallerySlides = [...document.querySelectorAll(".gallery-slide")];
 const galleryDots = document.getElementById("galleryDots");
 let galleryIndex = 0;
 let galleryDragged = false;
 
-gallerySlides.forEach((_, index) => {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.setAttribute("aria-label", String(index + 1));
-    dot.addEventListener("click", () => showGallerySlide(index));
-    galleryDots.append(dot);
-});
-
-function showGallerySlide(index) {
-    const total = gallerySlides.length;
-    galleryIndex = (index + total) % total;
-
-    gallerySlides.forEach((slide, slideIndex) => {
-        slide.classList.toggle("is-active", slideIndex === galleryIndex);
-        slide.classList.toggle("is-prev", slideIndex === (galleryIndex - 1 + total) % total);
-        slide.classList.toggle("is-next", slideIndex === (galleryIndex + 1) % total);
+if (gallerySlides.length) {
+    gallerySlides.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.setAttribute("aria-label", String(index + 1));
+        dot.addEventListener("click", () => showGallerySlide(index));
+        galleryDots.append(dot);
     });
 
-    galleryDots.querySelectorAll("button").forEach((dot, dotIndex) => {
-        dot.classList.toggle("is-active", dotIndex === galleryIndex);
-    });
-}
+    function showGallerySlide(index) {
+        const total = gallerySlides.length;
+        galleryIndex = (index + total) % total;
 
-document.querySelector("[data-gallery-prev]").addEventListener("click", () => {
-    showGallerySlide(galleryIndex - 1);
-});
+        gallerySlides.forEach((slide, slideIndex) => {
+            slide.classList.toggle("is-active", slideIndex === galleryIndex);
+            slide.classList.toggle("is-prev", slideIndex === (galleryIndex - 1 + total) % total);
+            slide.classList.toggle("is-next", slideIndex === (galleryIndex + 1) % total);
+        });
 
-document.querySelector("[data-gallery-next]").addEventListener("click", () => {
-    showGallerySlide(galleryIndex + 1);
-});
-
-const galleryStage = document.querySelector(".gallery-stage");
-let pointerStartX = 0;
-
-galleryStage.addEventListener("pointerdown", (event) => {
-    pointerStartX = event.clientX;
-    galleryDragged = false;
-});
-
-galleryStage.addEventListener("pointerup", (event) => {
-    const distance = event.clientX - pointerStartX;
-    if (Math.abs(distance) > 40) {
-        galleryDragged = true;
-        showGallerySlide(galleryIndex + (distance < 0 ? 1 : -1));
+        galleryDots.querySelectorAll("button").forEach((dot, dotIndex) => {
+            dot.classList.toggle("is-active", dotIndex === galleryIndex);
+        });
     }
-});
 
-gallerySlides.forEach((slide) => {
-    slide.addEventListener("click", (event) => {
-        if (galleryDragged) {
-            event.preventDefault();
-            event.stopPropagation();
+    document.querySelector("[data-gallery-prev]").addEventListener("click", () => {
+        showGallerySlide(galleryIndex - 1);
+    });
+
+    document.querySelector("[data-gallery-next]").addEventListener("click", () => {
+        showGallerySlide(galleryIndex + 1);
+    });
+
+    const galleryStage = document.querySelector(".gallery-stage");
+    let pointerStartX = 0;
+
+    galleryStage.addEventListener("pointerdown", (event) => {
+        pointerStartX = event.clientX;
+        galleryDragged = false;
+    });
+
+    galleryStage.addEventListener("pointerup", (event) => {
+        const distance = event.clientX - pointerStartX;
+        if (Math.abs(distance) > 40) {
+            galleryDragged = true;
+            showGallerySlide(galleryIndex + (distance < 0 ? 1 : -1));
         }
     });
-});
 
-Fancybox.bind("[data-fancybox='works']", {
-    Hash: false,
-    Images: {
-        zoom: true
+    gallerySlides.forEach((slide) => {
+        slide.addEventListener("click", (event) => {
+            if (galleryDragged) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    });
+
+    if (typeof Fancybox !== "undefined") {
+        Fancybox.bind("[data-fancybox='works']", {
+            Hash: false,
+            Images: {
+                zoom: true
+            }
+        });
     }
-});
 
-showGallerySlide(0);
+    showGallerySlide(0);
+}
