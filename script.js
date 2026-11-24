@@ -63,7 +63,7 @@ const translations = {
         footerPrivacy: "Privacy Policy / Πολιτική Απορρήτου",
         closeQuote: "Close",
         language: "Language",
-        policyTitle: "Privacy Policy - ISOCOAT",
+        policyTitle: "Privacy Policy - MARIAN STEFAN",
         policyBack: "Home"
     },
     el: {
@@ -122,7 +122,7 @@ const translations = {
         footerPrivacy: "Πολιτική Απορρήτου / Privacy Policy",
         closeQuote: "Κλείσιμο",
         language: "Γλώσσα",
-        policyTitle: "Πολιτική Απορρήτου - ISOCOAT",
+        policyTitle: "Πολιτική Απορρήτου - MARIAN STEFAN",
         policyBack: "Αρχική"
     }
 };
@@ -187,7 +187,7 @@ function applyLanguage(lang) {
         button.setAttribute("aria-pressed", String(isActive));
     });
 
-    localStorage.setItem("isocoat-lang", lang);
+    localStorage.setItem("marian-stefan-lang", lang);
 }
 
 if (menuButton && navLinks) {
@@ -245,7 +245,7 @@ langButtons.forEach((button) => {
     });
 });
 
-const savedLang = localStorage.getItem("isocoat-lang");
+const savedLang = localStorage.getItem("marian-stefan-lang");
 applyLanguage(savedLang === "el" || savedLang === "en" ? savedLang : "el");
 
 const gallerySlides = [...document.querySelectorAll(".gallery-slide")];
